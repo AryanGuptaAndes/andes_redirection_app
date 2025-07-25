@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redirecting...</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+    .link-box {
+      font-size: 18px;
+      color: #333;
+      margin-top: 20px;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      let redirectUrl = "";
+      let platformText = "";
+
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        redirectUrl = "https://apps.apple.com/in/app/andes/id6747010488";
+        platformText = "iOS device detected. Redirecting to App Store...";
+      } else if (/android/i.test(userAgent)) {
+        redirectUrl = "https://play.google.com/store/apps/details?id=com.andes.laundry";
+        platformText = "Android device detected. Redirecting to Play Store...";
+      } else {
+        redirectUrl = "https://api.whatsapp.com/send/?phone=8626076578";
+        platformText = "Other device detected. Redirecting to WhatsApp...";
+      }
+
+      document.getElementById("info").innerText = platformText;
+      document.getElementById("link").innerHTML = `👉 <a href="${redirectUrl}">${redirectUrl}</a>`;
+
+      // Auto-redirect after 3 seconds
+      setTimeout(function () {
+        window.location.href = redirectUrl;
+      }, 1000);
+    };
+  </script>
+</head>
+<body>
+  <h2>Redirecting to Andes...</h2>
+  <div class="link-box" id="info">Detecting your device...</div>
+  <div class="link-box" id="link"></div>
+  <p style="margin-top: 50px; font-size: 14px; color: gray;">If you're not redirected automatically, click the link above.</p>
+</body>
+</html>
